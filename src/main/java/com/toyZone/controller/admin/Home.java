@@ -9,9 +9,9 @@ import com.toyZone.interceptor.Auth.Role;
 
 @Controller
 public class Home {
-	@Auth(role = Role.ADMIN)
-	@RequestMapping(path = "/admin/trang-chu",method = RequestMethod.GET)
-	public String viewHomePage() {
-		return "admin/home";
-	}
+    @Auth(role = Role.ADMIN)
+    @RequestMapping(path = "/admin/trang-chu", method = RequestMethod.GET)
+    public String viewHomePage() {
+        return "admin/home";
+    }
 }

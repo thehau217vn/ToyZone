@@ -15,61 +15,61 @@ import org.springframework.web.servlet.ModelAndView;
 import com.toyZone.dto.SessionUser;
 
 public class AuthInterceptor implements HandlerInterceptor {
-	@Value("${user.login}")
-	String loginUrl;
-	
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		// TODO Auto-generated method stub
-		HandlerMethod handlerMethod = (HandlerMethod) handler;
+    @Value("${user.login}")
+    String loginUrl;
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
+        // TODO Auto-generated method stub
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
-        
+
         Auth roleAnnotation = AnnotationUtils.findAnnotation(method, Auth.class);
-        
+
         Auth.Role role = roleAnnotation != null ? roleAnnotation.role() : null;
-        
+
         HttpSession session = request.getSession();
-        
-        
-        if(session.getAttribute("sessionUser")!=null) {
-        	SessionUser sessionUser =(SessionUser) session.getAttribute("sessionUser");
-        	boolean isLogined = sessionUser.getCheckLogin();
-            
+
+
+        if (session.getAttribute("sessionUser") != null) {
+            SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+            boolean isLogined = sessionUser.getCheckLogin();
+
             Auth.Role loginRole = sessionUser.getRole() != null ? Auth.Role.valueOf(sessionUser.getRole().toUpperCase()) : null;
-            
+
             if (role != null) {
-            	if(!isLogined) {
-            		response.sendRedirect(request.getContextPath()+loginUrl);
+                if (!isLogined) {
+                    response.sendRedirect(request.getContextPath() + loginUrl);
                     return false;
-            	}else {
-            		if (role != Auth.Role.LOGIN && role != loginRole) {
-                        response.sendRedirect(request.getContextPath()+"/error/403");
+                } else {
+                    if (role != Auth.Role.LOGIN && role != loginRole) {
+                        response.sendRedirect(request.getContextPath() + "/error/403");
                         return false;
                     }
-            	}
-            	 
+                }
+
             }
-        }else {
-        	response.sendRedirect(request.getContextPath()+loginUrl);
+        } else {
+            response.sendRedirect(request.getContextPath() + loginUrl);
             return false;
         }
-        
-		return true;
-	}
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
+        return true;
+    }
 
-	}
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                           ModelAndView modelAndView) throws Exception {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-		// TODO Auto-generated method stub
+    }
 
-	}
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        // TODO Auto-generated method stub
+
+    }
 
 }

@@ -14,35 +14,35 @@ import com.toyZone.service.ProductService;
 @Controller
 @RequestMapping("/admin/api/v1/order")
 public class OrderApi {
-	@Autowired
-	OrderService orderService;
-	
-	@Autowired
-	ProductOrderService productOrderService;
-	
-	@Autowired
-	ProductService productService;
-	
-	@RequestMapping(path = "/{idOrder}",method = RequestMethod.DELETE)
-	@ResponseBody
-	public String delete(@PathVariable int idOrder) {
-		if(orderService.deleteOrderService(idOrder)) {
-			return "success";
-		}else {
-			return "fail";
-		}
-	
-	}
-	
-	@RequestMapping(path = "/{idOrder}",method = RequestMethod.PUT)
-	@ResponseBody
-	public String update(@PathVariable int idOrder ) {
-		
-		if(orderService.updateOrderByStatus(true, idOrder)) {
-			
-			return "success";
-		}
-		return "fail";
-		
-	}
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    ProductOrderService productOrderService;
+
+    @Autowired
+    ProductService productService;
+
+    @RequestMapping(path = "/{idOrder}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String delete(@PathVariable int idOrder) {
+        if (orderService.deleteOrderService(idOrder)) {
+            return "success";
+        } else {
+            return "fail";
+        }
+
+    }
+
+    @RequestMapping(path = "/{idOrder}", method = RequestMethod.PUT)
+    @ResponseBody
+    public String update(@PathVariable int idOrder) {
+
+        if (orderService.updateOrderByStatus(true, idOrder)) {
+
+            return "success";
+        }
+        return "fail";
+
+    }
 }

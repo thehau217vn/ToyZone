@@ -16,108 +16,108 @@ import com.toyZone.dto.OrderDto;
 @Entity
 @Table(name = "`order`")
 public class Order extends Abstract {
-	@Column(name = "content",columnDefinition = "nvarchar(255)")
-	private String content;
-	@Column(name = "delivey_address",columnDefinition = "nvarchar(255)")
-	private String deliveryAddress;
-	@Column(name = "phone")
-	private String phone;
-	@Column(name = "receiver",columnDefinition = "nvarchar(255)")
-	private String receiver;
-	@Column(name = "status")
-	private Boolean status;
-	@Column(name = "total_money")
-	private Long totalMoney;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-	@OneToMany(mappedBy = "order")
-	private List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
+    @Column(name = "content", columnDefinition = "nvarchar(255)")
+    private String content;
+    @Column(name = "delivey_address", columnDefinition = "nvarchar(255)")
+    private String deliveryAddress;
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "receiver", columnDefinition = "nvarchar(255)")
+    private String receiver;
+    @Column(name = "status")
+    private Boolean status;
+    @Column(name = "total_money")
+    private Long totalMoney;
 
-	public String getContent() {
-		return content;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    @OneToMany(mappedBy = "order")
+    private List<ProductOrder> productOrders = new ArrayList<ProductOrder>();
 
-	public String getDeliveryAddress() {
-		return deliveryAddress;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setDeliveryAddress(String deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public Boolean getStatus() {
-		return status;
-	}
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
 
-	public void setStatus(Boolean status) {
-		this.status = status;
-	}
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
 
-	public Long getTotalMoney() {
-		return totalMoney;
-	}
+    public Boolean getStatus() {
+        return status;
+    }
 
-	public void setTotalMoney(Long totalMoney) {
-		this.totalMoney = totalMoney;
-	}
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-	public User getCustomer() {
-		return user;
-	}
+    public Long getTotalMoney() {
+        return totalMoney;
+    }
 
-	public void setCustomer(User user) {
-		this.user = user;
-	}
+    public void setTotalMoney(Long totalMoney) {
+        this.totalMoney = totalMoney;
+    }
 
-	public List<ProductOrder> getProductOrders() {
-		return productOrders;
-	}
+    public User getCustomer() {
+        return user;
+    }
 
-	public void setProductOrders(List<ProductOrder> productOrders) {
-		this.productOrders = productOrders;
-	}
+    public void setCustomer(User user) {
+        this.user = user;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public List<ProductOrder> getProductOrders() {
+        return productOrders;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setProductOrders(List<ProductOrder> productOrders) {
+        this.productOrders = productOrders;
+    }
 
-	public String getReceiver() {
-		return receiver;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public Order() {
-		super();
-	}
+    public String getReceiver() {
+        return receiver;
+    }
 
-	public OrderDto convertToDto() {
-		OrderDto orderdto = new OrderDto();
-		orderdto.setId(getId());
-		orderdto.setContent(content);
-		orderdto.setCreatedDate(updatedAt);
-		orderdto.setDeliveryAddress(deliveryAddress);
-		orderdto.setTotalMoney(totalMoney);
-		orderdto.setPhone(phone);
-		orderdto.setReceiver(receiver);
-		if(user!=null) {
-			orderdto.setUserDto(user.convertToDto());
-		}
-		orderdto.setStatus(status);
-		return orderdto;		
-	}
-	
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public Order() {
+        super();
+    }
+
+    public OrderDto convertToDto() {
+        OrderDto orderdto = new OrderDto();
+        orderdto.setId(getId());
+        orderdto.setContent(content);
+        orderdto.setCreatedDate(updatedAt);
+        orderdto.setDeliveryAddress(deliveryAddress);
+        orderdto.setTotalMoney(totalMoney);
+        orderdto.setPhone(phone);
+        orderdto.setReceiver(receiver);
+        if (user != null) {
+            orderdto.setUserDto(user.convertToDto());
+        }
+        orderdto.setStatus(status);
+        return orderdto;
+    }
+
 }

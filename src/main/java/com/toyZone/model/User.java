@@ -15,114 +15,117 @@ import com.toyZone.dto.UserDto;
 
 @Entity
 @Table(name = "`user`")
-public class User extends Abstract{
-	@Column(name = "fullname",columnDefinition = "nvarchar(255)")
-	private String fullName;
-	
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "phone")
-	private String phone;
-	
-	@Column(name = "account")
-	private String account;
-	
-	@Column(name = "password")
-	private String password;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Order> orders = new ArrayList<Order>();
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id")
-	private Role role;
+public class User extends Abstract {
+    @Column(name = "fullname", columnDefinition = "nvarchar(255)")
+    private String fullName;
 
-	public String getFullName() {
-		return fullName;
-	}
+    @Column(name = "email")
+    private String email;
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    @Column(name = "phone")
+    private String phone;
 
-	public String getEmail() {
-		return email;
-	}
+    @Column(name = "account")
+    private String account;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    @Column(name = "password")
+    private String password;
 
-	public String getPhone() {
-		return phone;
-	}
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<Order>();
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
-	public String getAccount() {
-		return account;
-	}
+    public String getFullName() {
+        return fullName;
+    }
 
-	public void setAccount(String account) {
-		this.account = account;
-	}
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
-	public Role getRole() {
-		return role;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	public List<Order> getOrders() {
-		return orders;
-	}
+    public List<Order> getOrders() {
+        return orders;
+    }
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-	public UserDto convertToDto() {
-		UserDto dto = new UserDto();
-		dto.setId(getId());
-		dto.setFullName(getFullName());
-		dto.setEmail(getEmail());
-		dto.setPhone(getPhone());
-		dto.setAccount(getAccount());
-		dto.setCreatedDate(getUpdatedAt());
-		dto.setPassword(getPassword());
-		if(role!=null) {
-			dto.setRoleId(getRole().getId());
-		}
-		return dto;
-	}
-	public User convertToEntity(UserDto userDto) {
-		setAccount(userDto.getAccount());
-		setPassword(userDto.getPassword());
-		setEmail(userDto.getEmail());
-		setFullName(userDto.getFullName());
-		setPhone(userDto.getPhone());
-		setPassword(userDto.getPassword());
-		Role role = new Role();
-		role.setId(userDto.getRoleId());
-		setRole(role);
-		return this;
-	}
-	public User() {
-		super();
-	}
-	
-	
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public UserDto convertToDto() {
+        UserDto dto = new UserDto();
+        dto.setId(getId());
+        dto.setFullName(getFullName());
+        dto.setEmail(getEmail());
+        dto.setPhone(getPhone());
+        dto.setAccount(getAccount());
+        dto.setCreatedDate(getUpdatedAt());
+        dto.setPassword(getPassword());
+        if (role != null) {
+            dto.setRoleId(getRole().getId());
+        }
+        return dto;
+    }
+
+    public User convertToEntity(UserDto userDto) {
+        setAccount(userDto.getAccount());
+        setPassword(userDto.getPassword());
+        setEmail(userDto.getEmail());
+        setFullName(userDto.getFullName());
+        setPhone(userDto.getPhone());
+        setPassword(userDto.getPassword());
+        Role role = new Role();
+        role.setId(userDto.getRoleId());
+        setRole(role);
+        return this;
+    }
+
+    public User() {
+        super();
+    }
+
+
 }

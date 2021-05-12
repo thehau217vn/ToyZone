@@ -34,116 +34,120 @@ import com.toyZone.utils.MessageRespone;
 
 @Controller
 public class AccountController {
-	@Autowired
-	UserService userService;
-	@Autowired
-	RoleService roleService;
-	@Autowired
-	MessageRespone messageRespone;
-	@Autowired
-	JavaMailSender mailSender;
-	@Auth(role = Role.LOGIN)
-	@RequestMapping(path = "/login",method = RequestMethod.GET)
-	public String login(ModelMap map) {
-		map.addAttribute("user", new UserDto());
-		return "/web/account/login";
-	}
-	@Auth(role = Role.LOGIN)
-	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String login(ModelMap map,HttpSession session,@Validated @ModelAttribute("user")  AccountDto user,BindingResult result){
-		UserDto loginUser = null;
-		if(result.hasErrors()) {
-			map.addAttribute("user", user);
-			return "/web/account/login";
-		}
-		
-		loginUser = userService.getUserByUserNameAndPassWordService(user.getAccount(),user.getPassword());
-		if(loginUser!=null) {
-			SessionUser sessionUser =  new SessionUser();
-			sessionUser.setUserId(loginUser.getId());
-			sessionUser.setFullName(loginUser.getFullName());
-			sessionUser.setRole(roleService.getRoleById(loginUser.getRoleId()).getName());
-			sessionUser.setCheckLogin(true);
-			session.setAttribute("sessionUser", sessionUser);
-			if(loginUser.getRoleId()==Constant.ADMIN) {
-				return "redirect:/admin/trang-chu";
-			}else {
-				return "redirect:/home";
-			}
-			
-		}else {
-			map.addAttribute("user", user);
-			map.addAttribute("message", "Tài khoản hoặc mật khẩu không đúng");
-			return "/web/account/login";
-		}
-		
-	}
-	@RequestMapping(path = "/register",method = RequestMethod.GET)
-	public String register(ModelMap map,@RequestParam(required = false) String message) {
-		map.addAttribute("message", message);
-		map.addAttribute("userDk", new UserDto());
-		if(message!=null) {
-			Map<String, String> mesMap= messageRespone.getMessage(message);
-			map.addAttribute("message",mesMap.get("message"));
-			map.addAttribute("alert",mesMap.get("alert"));
-		}
-		return "/web/account/register";
-	}
-	
-	@RequestMapping(path = "/register",method = RequestMethod.POST)
-	public String register(ModelMap map,HttpSession session, HttpServletRequest request,@Validated @ModelAttribute("userDk") UserDto userDto,BindingResult bindingResult,@RequestParam(required = false) String message) {
-		if(bindingResult.hasErrors()) {
-			return "/web/account/register";
-		}
-		String[] filter = {"account",userDto.getAccount()};
-		List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
-		if(users!=null&& users.size()>0) {
-			map.addAttribute("message", "error_register");
-			return "redirect:/register";
-		}
-		userDto.setRoleId(Constant.USER);
-		userService.saveUserService(userDto);
-		map.addAttribute("message", "success_register");
-		
-		//mail here
-		
-		try {
-			//config mail here
-			NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
-			StringBuilder sendText = new StringBuilder();
-			String from = "toychildshop@gmail.com";
-		//	List<UserDto> listUser = new ArrayList<UserDto>();
-			//
-			sendText.append(
-					"<p>Bạn đã đăng ký thành công"
-					);
-			MimeMessage mail = mailSender.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(mail);
-			
-			SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-			UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
-			//UserDto user = new UserDto();
-			
-			helper.setFrom(from, from);
-			//helper.setTo(userDtoMail.getEmail());
-			helper.setReplyTo(from, from);
-			helper.setSubject("Thank You !");
-			helper.setText(sendText.toString(), true);
-			//send req
-			mailSender.send(mail);
-			
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
-		session = request.getSession(false);
-		return "redirect:/home";
-		
-	}
-	@Auth(role = Role.LOGIN)
-	@RequestMapping(path = "/logout")
-	public String logout(HttpSession session,HttpServletRequest request ) {
-		session = request.getSession(false);
-		session.removeAttribute("sessionUser");
-		return "redirect:/home";
-	}
+    @Autowired
+    UserService userService;
+    @Autowired
+    RoleService roleService;
+    @Autowired
+    MessageRespone messageRespone;
+    @Autowired
+    JavaMailSender mailSender;
+
+    @Auth(role = Role.LOGIN)
+    @RequestMapping(path = "/login", method = RequestMethod.GET)
+    public String login(ModelMap map) {
+        map.addAttribute("user", new UserDto());
+        return "/web/account/login";
+    }
+
+    @Auth(role = Role.LOGIN)
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public String login(ModelMap map, HttpSession session, @Validated @ModelAttribute("user") AccountDto user, BindingResult result) {
+        UserDto loginUser = null;
+        if (result.hasErrors()) {
+            map.addAttribute("user", user);
+            return "/web/account/login";
+        }
+
+        loginUser = userService.getUserByUserNameAndPassWordService(user.getAccount(), user.getPassword());
+        if (loginUser != null) {
+            SessionUser sessionUser = new SessionUser();
+            sessionUser.setUserId(loginUser.getId());
+            sessionUser.setFullName(loginUser.getFullName());
+            sessionUser.setRole(roleService.getRoleById(loginUser.getRoleId()).getName());
+            sessionUser.setCheckLogin(true);
+            session.setAttribute("sessionUser", sessionUser);
+            if (loginUser.getRoleId() == Constant.ADMIN) {
+                return "redirect:/admin/trang-chu";
+            } else {
+                return "redirect:/home";
+            }
+
+        } else {
+            map.addAttribute("user", user);
+            map.addAttribute("message", "Tài khoản hoặc mật khẩu không đúng");
+            return "/web/account/login";
+        }
+
+    }
+
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
+    public String register(ModelMap map, @RequestParam(required = false) String message) {
+        map.addAttribute("message", message);
+        map.addAttribute("userDk", new UserDto());
+        if (message != null) {
+            Map<String, String> mesMap = messageRespone.getMessage(message);
+            map.addAttribute("message", mesMap.get("message"));
+            map.addAttribute("alert", mesMap.get("alert"));
+        }
+        return "/web/account/register";
+    }
+
+    @RequestMapping(path = "/register", method = RequestMethod.POST)
+    public String register(ModelMap map, HttpSession session, HttpServletRequest request, @Validated @ModelAttribute("userDk") UserDto userDto, BindingResult bindingResult, @RequestParam(required = false) String message) {
+        if (bindingResult.hasErrors()) {
+            return "/web/account/register";
+        }
+        String[] filter = {"account", userDto.getAccount()};
+        List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
+        if (users != null && users.size() > 0) {
+            map.addAttribute("message", "error_register");
+            return "redirect:/register";
+        }
+        userDto.setRoleId(Constant.USER);
+        userService.saveUserService(userDto);
+        map.addAttribute("message", "success_register");
+
+        //mail here
+
+        try {
+            //config mail here
+            NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
+            StringBuilder sendText = new StringBuilder();
+            String from = "toychildshop@gmail.com";
+            //	List<UserDto> listUser = new ArrayList<UserDto>();
+            //
+            sendText.append(
+                    "<p>Bạn đã đăng ký thành công"
+            );
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mail);
+
+            SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+            UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
+            //UserDto user = new UserDto();
+
+            helper.setFrom(from, from);
+            //helper.setTo(userDtoMail.getEmail());
+            helper.setReplyTo(from, from);
+            helper.setSubject("Thank You !");
+            helper.setText(sendText.toString(), true);
+            //send req
+            mailSender.send(mail);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        session = request.getSession(false);
+        return "redirect:/home";
+
+    }
+
+    @Auth(role = Role.LOGIN)
+    @RequestMapping(path = "/logout")
+    public String logout(HttpSession session, HttpServletRequest request) {
+        session = request.getSession(false);
+        session.removeAttribute("sessionUser");
+        return "redirect:/home";
+    }
 }

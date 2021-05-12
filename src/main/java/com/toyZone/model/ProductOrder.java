@@ -14,64 +14,65 @@ import com.toyZone.dto.ProductOrderDto;
 
 @Entity
 @Table(name = "product_order")
-public class ProductOrder implements Serializable{
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_id")
-	private Product product;
-	
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "odder_id")
-	private Order order;
-	
-	@Column(name = "count")
-	private int count;
-	
-	@Column(name = "price")
-	private Long price;
+public class ProductOrder implements Serializable {
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-	public Product getProduct() {
-		return product;
-	}
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "odder_id")
+    private Order order;
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    @Column(name = "count")
+    private int count;
 
-	public Order getOrder() {
-		return order;
-	}
+    @Column(name = "price")
+    private Long price;
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+    public Product getProduct() {
+        return product;
+    }
 
-	public int getCount() {
-		return count;
-	}
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-	public void setCount(int count) {
-		this.count = count;
-	}
+    public Order getOrder() {
+        return order;
+    }
 
-	public Long getPrice() {
-		return price;
-	}
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
-	public void setPrice(Long price) {
-		this.price = price;
-	}
+    public int getCount() {
+        return count;
+    }
 
-	public ProductOrder() {
-		super();
-	}
-	public ProductOrderDto convertToDto() {
-		ProductOrderDto productOrderDto = new ProductOrderDto();
-		productOrderDto.setIdOrder(order.getId());
-		productOrderDto.setIdProduct(product.getId());
-		productOrderDto.setPrice(price);
-		productOrderDto.setCount(count);
-		return productOrderDto;
-	}
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
+    public ProductOrder() {
+        super();
+    }
+
+    public ProductOrderDto convertToDto() {
+        ProductOrderDto productOrderDto = new ProductOrderDto();
+        productOrderDto.setIdOrder(order.getId());
+        productOrderDto.setIdProduct(product.getId());
+        productOrderDto.setPrice(price);
+        productOrderDto.setCount(count);
+        return productOrderDto;
+    }
 }

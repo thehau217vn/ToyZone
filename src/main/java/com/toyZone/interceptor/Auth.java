@@ -8,10 +8,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Auth {
-	public enum Role {
+    public enum Role {
         LOGIN,
         ADMIN,
         USER,
-    };
-    public Role role() default Role.LOGIN; 
+    }
+
+    ;
+
+    public Role role() default Role.LOGIN;
 }

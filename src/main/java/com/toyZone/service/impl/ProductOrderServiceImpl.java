@@ -15,29 +15,31 @@ import com.toyZone.service.ProductOrderService;
 
 @Service
 public class ProductOrderServiceImpl implements ProductOrderService {
-	@Autowired
-	ProductOrderRepo productOrderRepo;
-	@Override
-	public void saveProductOderService(ProductOrderDto productOrderDto) {
-		// TODO Auto-generated method stub
-		ProductOrder productOrder = productOrderDto.convertToEntitiy();
-		
-		productOrderRepo.insert(productOrder);
-		
-	}
-	@Override
-	public List<ProductOrderDto> getListProductOrderDtoByOrder(Integer idOrder) {
-		// TODO Auto-generated method stub
-		List<ProductOrderDto> productOrderDtos = new ArrayList<ProductOrderDto>();
-		
-		Map<String, Object> property = new HashMap<String, Object>();
-		property.put("odder_id", idOrder);
-		
-		List<ProductOrder> productOrders =(List<ProductOrder>) (productOrderRepo.findByProperty(property, null, null, null, null, null)[1]);
-		for(ProductOrder entity : productOrders) {
-			productOrderDtos.add(entity.convertToDto());
-		}
-		return productOrderDtos;
-	}
-	
+    @Autowired
+    ProductOrderRepo productOrderRepo;
+
+    @Override
+    public void saveProductOderService(ProductOrderDto productOrderDto) {
+        // TODO Auto-generated method stub
+        ProductOrder productOrder = productOrderDto.convertToEntitiy();
+
+        productOrderRepo.insert(productOrder);
+
+    }
+
+    @Override
+    public List<ProductOrderDto> getListProductOrderDtoByOrder(Integer idOrder) {
+        // TODO Auto-generated method stub
+        List<ProductOrderDto> productOrderDtos = new ArrayList<ProductOrderDto>();
+
+        Map<String, Object> property = new HashMap<String, Object>();
+        property.put("odder_id", idOrder);
+
+        List<ProductOrder> productOrders = (List<ProductOrder>) (productOrderRepo.findByProperty(property, null, null, null, null, null)[1]);
+        for (ProductOrder entity : productOrders) {
+            productOrderDtos.add(entity.convertToDto());
+        }
+        return productOrderDtos;
+    }
+
 }
