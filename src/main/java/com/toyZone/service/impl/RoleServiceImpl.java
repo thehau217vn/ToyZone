@@ -13,6 +13,7 @@ import com.toyZone.service.RoleService;
 
 @Service
 public class RoleServiceImpl implements RoleService {
+<<<<<<< HEAD
 	@Autowired
 	RoleRepo roleRepo;
 
@@ -33,4 +34,26 @@ public class RoleServiceImpl implements RoleService {
 		// TODO Auto-generated method stub
 		return roleRepo.findById(id).convertToDto();
 	}
+=======
+    @Autowired
+    RoleRepo roleRepo;
+
+    @Override
+    public List<RoleDto> getListRoleService() {
+        // TODO Auto-generated method stub
+        List<RoleDto> dtos = new ArrayList<RoleDto>();
+        List<Role> entities = roleRepo.findAll();
+        for (Role role : entities) {
+            RoleDto dto = role.convertToDto();
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    @Override
+    public RoleDto getRoleById(int id) {
+        // TODO Auto-generated method stub
+        return roleRepo.findById(id).convertToDto();
+    }
+>>>>>>> develop
 }

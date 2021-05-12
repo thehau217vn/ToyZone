@@ -6,6 +6,7 @@ import com.toyZone.dto.OrderDto;
 
 
 public interface OrderService {
+<<<<<<< HEAD
 	OrderDto saveOderService(OrderDto orderDto);
 	Object[] viewPageOrderService(int offset, int limit);
 	Object[] viewPageOrderServiceByStatus(int offset, int limit,Boolean status);
@@ -13,4 +14,19 @@ public interface OrderService {
 	Boolean updateOrderByStatus(Boolean status,int idOrder);
 	Boolean deleteOrderService(int idOrder);
 	List<String[]> thongKeBanHang(String tungay,String denngay);
+=======
+    OrderDto saveOderService(OrderDto orderDto);
+
+    Object[] viewPageOrderService(int offset, int limit);
+
+    Object[] viewPageOrderServiceByStatus(int offset, int limit, Boolean status);
+
+    OrderDto findByIdOrderService(Integer order);
+
+    Boolean updateOrderByStatus(Boolean status, int idOrder);
+
+    Boolean deleteOrderService(int idOrder);
+
+    List<String[]> thongKeBanHang(String tungay, String denngay);
+>>>>>>> develop
 }

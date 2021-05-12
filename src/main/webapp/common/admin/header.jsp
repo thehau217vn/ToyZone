@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 <%@page import="com.toyZone.dto.SessionUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+=======
+<%@page import="com.toyZone.dto.SessionUser" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="/common/taglib.jsp" %>
+>>>>>>> develop
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -17,6 +23,7 @@
         <div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
+<<<<<<< HEAD
                     
                     <%if(session.getAttribute("sessionUser") != null){%>
 	                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -39,6 +46,30 @@
 	                        </a>
 	                    </li>
                     <%}%>
+=======
+
+                        <%if(session.getAttribute("sessionUser") != null){%>
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        Xin chào, <%=((SessionUser) request.getSession().getAttribute("sessionUser")).getFullName()%>
+                    </a>
+                <li class="light-blue dropdown-modal">
+                    <a href='<c:url value='/logout'/>'>
+                        <i class="ace-icon fa fa-power-off"></i>
+                        Thoát
+                    </a>
+                </li>
+                <%} else {%>
+                <a data-toggle="dropdown" href="<c:url value='/login'/>" class="dropdown-toggle">
+                    Đăng nhập
+                </a>
+                <li class="light-blue dropdown-modal">
+                    <a href='<c:url value='/home'/>'>
+                        <i class="ace-icon fa fa-power-off"></i>
+                        Thoát
+                    </a>
+                </li>
+                <%}%>
+>>>>>>> develop
                 </li>
             </ul>
         </div>

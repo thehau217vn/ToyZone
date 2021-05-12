@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@include file="/common/taglib.jsp" %>
+>>>>>>> develop
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <spring:eval expression="@property.getProperty('category.url')" var="urlcategory"/>
 <spring:eval expression="@property.getProperty('product.url')" var="urlChooseCategory"/>
@@ -15,7 +20,14 @@
 <c:url var="url_user" value="${urluser}"/>
 <div id="sidebar" class="sidebar responsive ace-save-state">
     <script type="text/javascript">
+<<<<<<< HEAD
         try{ace.settings.loadState('sidebar')}catch(e){}
+=======
+        try {
+            ace.settings.loadState('sidebar')
+        } catch (e) {
+        }
+>>>>>>> develop
     </script>
     <div class="sidebar-shortcuts">
         <div class="sidebar-shortcuts-large">
@@ -46,7 +58,11 @@
         </div>
     </div>
     <ul class="nav nav-list">
+<<<<<<< HEAD
         <li >
+=======
+        <li>
+>>>>>>> develop
             <a class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
@@ -72,29 +88,50 @@
                 <li>
                     <a href="${url_order_chuagiao}?page=${pageProp}&maxPageItem=${maxPageItemProp}">
                         <i class="menu-icon fa fa-caret-right"></i>
+<<<<<<< HEAD
                        	Đơn hàng
+=======
+                        Đơn hàng
+>>>>>>> develop
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li>
                     <a href="${url_user}?page=${pageProp}&maxPageItem=${maxPageItemProp}">
                         <i class="menu-icon fa fa-caret-right"></i>
+<<<<<<< HEAD
                        Người Dùng
+=======
+                        Người Dùng
+>>>>>>> develop
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li>
                     <a href="${thongke_url}">
                         <i class="menu-icon fa fa-caret-right"></i>
+<<<<<<< HEAD
                        Thống Kê
                     </a>
                     <b class="arrow"></b>
                 </li>
                
+=======
+                        Thống Kê
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+>>>>>>> develop
             </ul>
         </li>
     </ul>
     <div class="sidebar-toggle sidebar-collapse">
+<<<<<<< HEAD
         <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+=======
+        <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left"
+           data-icon2="ace-icon fa fa-angle-double-right"></i>
+>>>>>>> develop
     </div>
 </div>

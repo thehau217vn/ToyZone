@@ -21,6 +21,7 @@ import com.toyZone.service.UserService;
 @Controller
 @RequestMapping(path = "/admin/api/v1/user")
 public class UserApi {
+<<<<<<< HEAD
 	@Autowired
 	UserService userService;
 	
@@ -63,4 +64,50 @@ public class UserApi {
 	public String update(@PathVariable Integer idUser) {
 		return userService.deleteUserService(idUser);
 	}
+=======
+    @Autowired
+    UserService userService;
+
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public UserDto insert(@RequestBody @Valid UserDto userDto, BindingResult bindingResult) {
+        UserDto newDto = new UserDto();
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<String, String>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            newDto.setValidated(false);
+            newDto.setErrorMessages(errors);
+        } else {
+            newDto = userService.saveUserService(userDto);
+            newDto.setValidated(true);
+        }
+        return newDto;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    @ResponseBody
+    public UserDto update(@RequestBody @Valid UserDto userDto, BindingResult bindingResult) {
+        UserDto newDto = new UserDto();
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<String, String>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            newDto.setValidated(false);
+            newDto.setErrorMessages(errors);
+        } else {
+            newDto = userService.saveUserService(userDto);
+            newDto.setValidated(true);
+        }
+        return newDto;
+    }
+
+    @RequestMapping(path = "/{idUser}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public String update(@PathVariable Integer idUser) {
+        return userService.deleteUserService(idUser);
+    }
+>>>>>>> develop
 }

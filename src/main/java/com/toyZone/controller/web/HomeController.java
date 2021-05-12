@@ -18,6 +18,7 @@ import com.toyZone.service.ProductService;
 
 @Controller
 public class HomeController {
+<<<<<<< HEAD
 	
 	@Autowired
 	ProductService productService;
@@ -55,4 +56,44 @@ public class HomeController {
 		map.addAttribute("product", productDto);
 		return "/web/khuyenmai";
 	}
+=======
+
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    CategoryService categoryService;
+
+    @RequestMapping(path = "/home", method = RequestMethod.GET)
+    public String viewHome(ModelMap map, HttpSession session) {
+
+
+        List<ProductDto> list = (List<ProductDto>) productService.viewPageProductService(0, 4, 0)[1];
+        List<ProductDto> listKm = productService.getListSpKhuyenMaiService(0, 4);
+        List<ProductDto> listhot = (List<ProductDto>) productService.viewPageProductHotService(0, 4)[1];
+        if (session.getAttribute("gioHang") == null) {
+            session.setAttribute("gioHang", new SessionGioHang());
+        }
+        map.addAttribute("products", list);
+        map.addAttribute("listKm", listKm);
+        map.addAttribute("listhot", listhot);
+        return "/web/home";
+    }
+
+    @RequestMapping(path = "/khuyenmai", method = RequestMethod.GET)
+    public String viewKhuyenMaiPage(ModelMap map, HttpSession session, @RequestParam int page,
+                                    @RequestParam int maxPageItem) {
+
+
+        List<ProductDto> listKm = productService.getListSpKhuyenMaiService((page - 1) * maxPageItem, maxPageItem);
+        ProductDto productDto = new ProductDto();
+
+        int total = productService.getCountSpKmService();
+        productDto.customPage(page, maxPageItem, total, listKm);
+
+
+        map.addAttribute("product", productDto);
+        return "/web/khuyenmai";
+    }
+>>>>>>> develop
 }
