@@ -30,7 +30,6 @@
                 <prop key="mail.smtp.starttls.enable">false</prop>
                 <prop key="mail.debug">true</prop>
                 <prop key="mail.transport.protocol">smtp</prop>
-
             </props>
         </property>
     </bean>

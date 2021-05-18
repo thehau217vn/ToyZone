@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="toyZone:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>toyZone</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="toyZone-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="toyZone:war exploded" />
+    </root>
+  </artifact>
+</component>

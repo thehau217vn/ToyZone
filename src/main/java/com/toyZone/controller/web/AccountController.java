@@ -58,7 +58,6 @@ public class AccountController {
             map.addAttribute("user", user);
             return "/web/account/login";
         }
-
         loginUser = userService.getUserByUserNameAndPassWordService(user.getAccount(), user.getPassword());
         if (loginUser != null) {
             SessionUser sessionUser = new SessionUser();
@@ -72,13 +71,11 @@ public class AccountController {
             } else {
                 return "redirect:/home";
             }
-
         } else {
             map.addAttribute("user", user);
             map.addAttribute("message", "Tài khoản hoặc mật khẩu không đúng");
             return "/web/account/login";
         }
-
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.GET)
@@ -112,23 +109,19 @@ public class AccountController {
 
         try {
             //config mail here
-            NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
             StringBuilder sendText = new StringBuilder();
             String from = "toychildshop@gmail.com";
-            //	List<UserDto> listUser = new ArrayList<UserDto>();
-            //
             sendText.append(
                     "<p>Bạn đã đăng ký thành công"
             );
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail);
 
-            SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-            UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
-            //UserDto user = new UserDto();
-
+//            SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+//            UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
             helper.setFrom(from, from);
-            //helper.setTo(userDtoMail.getEmail());
+            System.out.println(userDto.getEmail());
+            helper.setTo(userDto.getEmail());
             helper.setReplyTo(from, from);
             helper.setSubject("Thank You !");
             helper.setText(sendText.toString(), true);

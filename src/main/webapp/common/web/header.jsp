@@ -20,7 +20,7 @@
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="${homeURl}">ShopToyHVN</a></h1>
+            <h1><a href="${homeURl}">cc</a></h1>
         </div>
         <!---->
         <div class="top-nav">
