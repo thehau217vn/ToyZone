@@ -38,6 +38,11 @@ public class User extends Abstract {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @Column(name = "otpCode")
+    private String otpCode;
+
+    @Column(name = "verify")
+    private boolean verify;
     public String getFullName() {
         return fullName;
     }
@@ -95,6 +100,22 @@ public class User extends Abstract {
         this.orders = orders;
     }
 
+    public String getOtpCode() {
+        return otpCode;
+    }
+
+    public void setOtpCode(String otpCode) {
+        this.otpCode = otpCode;
+    }
+
+    public boolean isVerify() {
+        return verify;
+    }
+
+    public void setVerify(boolean verify) {
+        this.verify = verify;
+    }
+
     public UserDto convertToDto() {
         UserDto dto = new UserDto();
         dto.setId(getId());
@@ -104,6 +125,8 @@ public class User extends Abstract {
         dto.setAccount(getAccount());
         dto.setCreatedDate(getUpdatedAt());
         dto.setPassword(getPassword());
+        dto.setOtpCode(getOtpCode());
+        dto.setVerify(isVerify());
         if (role != null) {
             dto.setRoleId(getRole().getId());
         }
@@ -117,6 +140,8 @@ public class User extends Abstract {
         setFullName(userDto.getFullName());
         setPhone(userDto.getPhone());
         setPassword(userDto.getPassword());
+        setOtpCode(userDto.getOtpCode());
+        setVerify(userDto.isVerify());
         Role role = new Role();
         role.setId(userDto.getRoleId());
         setRole(role);

@@ -7,6 +7,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.toyZone.model.Role;
+import com.toyZone.utils.GenerateOTP;
 
 public class UserDto extends AbtractDto<UserDto> {
 
@@ -27,6 +28,8 @@ public class UserDto extends AbtractDto<UserDto> {
     @Size(min = 8, message = "Mật khẩu phải nhiều hơn 8 kí tự")
     private String password;
 
+    private String otpCode;
+    private boolean verify;
     private int roleId;
 
     public String getFullName() {
@@ -77,6 +80,22 @@ public class UserDto extends AbtractDto<UserDto> {
         this.roleId = roleId;
     }
 
+    public String getOtpCode() {
+        return otpCode;
+    }
+
+    public void setOtpCode(String otpCode) {
+        this.otpCode = otpCode;
+    }
+
+    public boolean isVerify() {
+        return verify;
+    }
+
+    public void setVerify(boolean verify) {
+        this.verify = verify;
+    }
+
     public User convertToEntities() {
         User entity = new User();
         entity.setId(getId());
@@ -85,6 +104,8 @@ public class UserDto extends AbtractDto<UserDto> {
         entity.setPhone(getPhone());
         entity.setAccount(getAccount());
         entity.setPassword(getPassword());
+        entity.setOtpCode(getOtpCode());
+        entity.setVerify(false);
         Role role = new Role();
         role.setId(getRoleId());
         entity.setRole(role);
