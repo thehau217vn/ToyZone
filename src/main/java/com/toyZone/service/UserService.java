@@ -7,6 +7,8 @@ public interface UserService {
 
     String deleteUserService(Integer id);
 
+    Boolean updateUserVerifyStatus (Integer id);
+
     Object[] viewPageUserService(int offset, int limit);
 
     UserDto findByIdUserService(Integer id);

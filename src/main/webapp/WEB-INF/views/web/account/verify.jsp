@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
-<spring:eval expression="@property.getProperty('user.verify')" var="userVerify"/>
-<c:url value="${user_verify}" var="userVerify" ></c:url>
+<spring:eval expression="@property.getProperty('user.verify')" var="userVer"/>
+<c:url value="${user_verify}" var="userVer" ></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,8 +25,8 @@
         <div class="col-md-6 log">
             <form:form action="${user_verify}" method="POST" modelAttribute="userVerify" >
                 <h5>Mã OTP</h5>
-                <form:input path="OTPCode"/>
-                <div style="color: red"><form:errors path="OTP"/></div>
+                <form:input path="otpCode"/>
+                <div style="color: red"><form:errors path="otpCode"/></div>
                 <input type="submit" value="Xác Thực" />
             </form:form>
         </div>

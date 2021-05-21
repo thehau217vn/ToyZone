@@ -45,6 +45,7 @@ public class AccountController {
     @Autowired
     JavaMailSender mailSender;
 
+    public static String userAccount = null;
     @Auth(role = Role.LOGIN)
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String login(ModelMap map) {
@@ -61,7 +62,7 @@ public class AccountController {
             return "/web/account/login";
         }
         loginUser = userService.getUserByUserNameAndPassWordService(user.getAccount(), user.getPassword());
-        if (loginUser != null) {
+        if (loginUser != null && !(loginUser.getRoleId() == 3)) {
             SessionUser sessionUser = new SessionUser();
             sessionUser.setUserId(loginUser.getId());
             sessionUser.setFullName(loginUser.getFullName());
@@ -92,6 +93,35 @@ public class AccountController {
         return "/web/account/register";
     }
 
+    @RequestMapping(path = "/verify", method = RequestMethod.GET)
+    public String verify(ModelMap map, @RequestParam(required = false) String message) {
+        map.addAttribute("messaege", message);
+        map.addAttribute("userVerify", new UserDto());
+        if (message != null) {
+            Map<String, String> mesMap = messageRespone.getMessage(message);
+            map.addAttribute("message", message);
+            map.addAttribute("alert", mesMap.get("alert"));
+        }
+        return "/web/account/verify";
+    }
+
+    @RequestMapping(path = "/verify", method = RequestMethod.POST)
+    public String verify(ModelMap map, HttpSession session,@Validated @ModelAttribute("userVerify") UserDto userVer, BindingResult result) {
+        String[] filter = {"account", userAccount};
+        List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
+
+        System.out.println("Code: " + userVer.getOtpCode() + " userAccount: " + users.get(0).getAccount());
+        String userCode = userService.findByIdUserService(users.get(0).getId()).getOtpCode();
+        if (userVer.getOtpCode().equals(userCode)) {
+            userService.updateUserVerifyStatus(users.get(0).getId());
+            System.out.println("UserOTP: " + userVer.getOtpCode() + " userCode: " + userCode);
+            map.addAttribute("message", "Kích hoạt tài khoản thành công");
+        } else {
+            map.addAttribute("message", "Kích hoạt tài khoản thất bại");
+        }
+        return "redirect:/home";
+    }
+
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public String register(ModelMap map, HttpSession session, HttpServletRequest request, @Validated @ModelAttribute("userDk") UserDto userDto, BindingResult bindingResult, @RequestParam(required = false) String message) {
         if (bindingResult.hasErrors()) {
@@ -104,10 +134,12 @@ public class AccountController {
             return "redirect:/register";
         }
         userDto.setRoleId(Constant.USER);
-        userService.saveUserService(userDto);
-        map.addAttribute("message", "success_register");
-
         userDto.setOtpCode(GenerateOTP.generateOTP());
+        userService.saveUserService(userDto);
+        userAccount = userDto.getAccount();
+        map.addAttribute("message", "Đăng ký thành công, vui lòng kiểm tra hộp thư");
+
+
        //mail here
 
         try {
@@ -315,8 +347,7 @@ public class AccountController {
             System.out.println(e.getMessage());
         }
         session = request.getSession(false);
-        return "redirect:/home";
-
+        return "redirect:/verify";
     }
 
 //    @RequestMapping(path = "/register", method = RequestMethod.POST)

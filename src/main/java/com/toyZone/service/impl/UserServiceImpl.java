@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.toyZone.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +79,22 @@ public class UserServiceImpl implements UserService {
             return "fail";
         }
     }
+
+    @Override
+    public Boolean updateUserVerifyStatus(Integer id) {
+        User user = userRepo.findById(id);
+        user.setVerify(true);
+        Role role = new Role();
+        role.setId(2);
+        user.setRole(role);
+        if (user != null) {
+            userRepo.update(user);
+            return true;
+        }
+
+        return false;
+    }
+
 
     @Override
     public Object[] viewPageUserService(int offset, int limit) {
