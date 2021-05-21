@@ -30,8 +30,9 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
     <mvc:resources mapping="/template/**" location="/template/"/>
     <mvc:resources mapping="/templateWeb/**" location="/templateWeb/"/>
-    <mvc:resources mapping="/images/*" location="/images/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
     <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
 
     <mvc:annotation-driven>
         <mvc:message-converters>

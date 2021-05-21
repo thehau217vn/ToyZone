@@ -20,7 +20,7 @@
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="${homeURl}">cc</a></h1>
+            <h1><a href="${homeURl}"><img src="${pageContext.request.contextPath}/images/cua/test.jpg" /></a></h1>
         </div>
         <!---->
         <div class="top-nav">
