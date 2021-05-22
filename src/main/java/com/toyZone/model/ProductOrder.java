@@ -12,6 +12,11 @@ import javax.persistence.Table;
 
 import com.toyZone.dto.ProductOrderDto;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Entity
 @Table(name = "product_order")
 public class ProductOrder implements Serializable {

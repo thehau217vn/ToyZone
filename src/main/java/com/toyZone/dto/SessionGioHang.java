@@ -3,6 +3,11 @@ package com.toyZone.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class SessionGioHang {
 
     private int totalItem = 0;

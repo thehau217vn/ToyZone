@@ -17,6 +17,11 @@ import com.toyZone.utils.Constant;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class AbstractRepoImpl<ID extends Serializable, T> implements AbstractRepo<ID, T> {
     private Class<T> perClass;
 

@@ -7,8 +7,13 @@ import javax.validation.constraints.NotNull;
 import com.toyZone.model.Category;
 import com.toyZone.model.Product;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class ProductDto extends AbtractDto<ProductDto> {
-    @NotBlank(message = "tên sản phẩm không được để trống")
+    @NotBlank(message = "Tên sản phẩm không được để trống")
     private String name;
     @NotNull(message = "Giá tiền không được để trống")
     @DecimalMin(value = "10000", message = "Giá phải từ 10,000 VND trở lên")

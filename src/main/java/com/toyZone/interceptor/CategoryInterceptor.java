@@ -8,6 +8,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.toyZone.service.CategoryService;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class CategoryInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     CategoryService categoryService;
@@ -15,7 +20,6 @@ public class CategoryInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        // TODO Auto-generated method stub
         request.setAttribute("menuCate", categoryService.viewAllService());
         return true;
     }

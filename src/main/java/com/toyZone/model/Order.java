@@ -13,6 +13,11 @@ import javax.persistence.Table;
 
 import com.toyZone.dto.OrderDto;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Entity
 @Table(name = "`order`")
 public class Order extends Abstract {

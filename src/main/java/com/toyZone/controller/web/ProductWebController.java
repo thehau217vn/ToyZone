@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.toyZone.dto.ProductDto;
 import com.toyZone.service.ProductService;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
+
 @Controller
 public class ProductWebController {
     @Autowired
@@ -24,11 +30,9 @@ public class ProductWebController {
                                        @RequestParam int maxPageItem) {
         Object[] objects = productService.viewPageProductService((page - 1) * maxPageItem, maxPageItem, idCategory);
         ProductDto productDto = new ProductDto();
-
         Long l = (Long) objects[0];
         int total = l.intValue();
         productDto.customPage(page, maxPageItem, total, (List<ProductDto>) objects[1]);
-
         map.addAttribute("product", productDto);
         map.addAttribute("idCategory", idCategory);
         return "web/products";
@@ -38,7 +42,6 @@ public class ProductWebController {
     public String viewDetailProduct(ModelMap map, @PathVariable int idProduct, @PathVariable int idCategory) {
         Object[] objects = productService.viewPageProductService(0, 4, idCategory);
         ProductDto productDto = productService.findProductByIdService(idProduct);
-
         Long l = (Long) objects[0];
         int total = l.intValue();
         productDto.customPage(0, 4, total, (List<ProductDto>) objects[1]);
@@ -48,9 +51,7 @@ public class ProductWebController {
     }
 
     @RequestMapping(path = "/product/find", method = RequestMethod.POST)
-    public String viewFindProduct(@RequestParam String name,
-
-                                  ModelMap map) {
+    public String viewFindProduct(@RequestParam String name, ModelMap map) {
         String[] filter = {"name", name};
         Object[] objects = productService.findFilterProductService(filter);
         map.addAttribute("products", (List<ProductDto>) objects[1]);

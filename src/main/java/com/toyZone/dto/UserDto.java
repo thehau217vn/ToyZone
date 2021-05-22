@@ -7,7 +7,11 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.toyZone.model.Role;
-import com.toyZone.utils.GenerateOTP;
+
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
 
 public class UserDto extends AbtractDto<UserDto> {
 

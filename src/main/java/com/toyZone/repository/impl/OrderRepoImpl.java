@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 import com.toyZone.model.Order;
 import com.toyZone.repository.OrderRepo;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Repository
 public class OrderRepoImpl extends AbstractRepoImpl<Integer, Order> implements OrderRepo {
 

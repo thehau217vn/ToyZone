@@ -3,6 +3,11 @@ package com.toyZone.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class AccountDto {
     @NotBlank(message = "Tên tài khoản không được bỏ trống")
     private String account;

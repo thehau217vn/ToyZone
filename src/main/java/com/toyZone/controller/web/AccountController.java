@@ -1,9 +1,7 @@
 package com.toyZone.controller.web;
 
-import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -33,6 +31,10 @@ import com.toyZone.service.UserService;
 import com.toyZone.utils.Constant;
 import com.toyZone.utils.MessageRespone;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
 
 @Controller
 public class AccountController {
@@ -46,6 +48,7 @@ public class AccountController {
     JavaMailSender mailSender;
 
     public static String userAccount = null;
+
     @Auth(role = Role.LOGIN)
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String login(ModelMap map) {
@@ -106,7 +109,7 @@ public class AccountController {
     }
 
     @RequestMapping(path = "/verify", method = RequestMethod.POST)
-    public String verify(ModelMap map, HttpSession session,@Validated @ModelAttribute("userVerify") UserDto userVer, BindingResult result) {
+    public String verify(ModelMap map, HttpSession session, @Validated @ModelAttribute("userVerify") UserDto userVer, BindingResult result) {
         String[] filter = {"account", userAccount};
         List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
 
@@ -130,7 +133,7 @@ public class AccountController {
         String[] filter = {"account", userDto.getAccount()};
         List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
         if (users != null && users.size() > 0) {
-            map.addAttribute("message", "error_register");
+            map.addAttribute("message", "Đăng ký thành công, vui lòng kiểm tra lại");
             return "redirect:/register";
         }
         userDto.setRoleId(Constant.USER);
@@ -138,9 +141,6 @@ public class AccountController {
         userService.saveUserService(userDto);
         userAccount = userDto.getAccount();
         map.addAttribute("message", "Đăng ký thành công, vui lòng kiểm tra hộp thư");
-
-
-       //mail here
 
         try {
             //config mail here
@@ -272,7 +272,7 @@ public class AccountController {
                     "                                    Xin chào <b>" + userDto.getFullName() + "</b>,\n" +
                     "                                 </td>\n" +
                     "                                 <td style=\"display:block;margin-top:10px;text-align: left\">\n" +
-                    "                                    Cảm ơn bạn đã đăng ký tài khoản tại <b>ToyZoneShop</b> mã OTP của bạn là: <b>" + userDto.getOtpCode() + "</b> mã này có hiệu lực trong vòng 5 phút\n" +
+                    "                                    Cảm ơn bạn đã đăng ký tài khoản tại <b>ToyZoneShop</b> mã OTP của bạn là: <b>" + userDto.getOtpCode() + "</b> mã này có hiệu lực trong ngày hôm nay\n" +
                     "                                 </td>\n" +
                     "                              </tr>\n" +
                     "                              <tr>\n" +
@@ -331,7 +331,6 @@ public class AccountController {
                     "</html>");
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail);
-
 //            SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
 //            UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
             helper.setFrom(from, from);
@@ -349,25 +348,6 @@ public class AccountController {
         session = request.getSession(false);
         return "redirect:/verify";
     }
-
-//    @RequestMapping(path = "/register", method = RequestMethod.POST)
-//    public String registerTemp(ModelMap map, HttpSession session, HttpServletRequest request, @Validated @ModelAttribute("userDk") UserDto userDto, BindingResult bindingResult, @RequestParam(required = false) String message) {
-//        if (bindingResult.hasErrors()) {
-//            return "/web/account/register";
-//        }
-//        String[] filter = {"account", userDto.getAccount()};
-//        List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
-//        if (users != null && users.size() > 0) {
-//            map.addAttribute("message", "error_register");
-//            return "redirect:/register";
-//        }
-//        userDto.setRoleId(Constant.USER);
-//        userService.saveUserService(userDto);
-//        map.addAttribute("message", "success_register");
-//
-//        session = request.getSession(false);
-//        return "redirect:/home";
-//    }
 
     @Auth(role = Role.LOGIN)
     @RequestMapping(path = "/logout")

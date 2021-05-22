@@ -18,6 +18,11 @@ import com.toyZone.repository.ProductOrderRepo;
 import com.toyZone.service.OrderService;
 import com.toyZone.utils.Constant;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
@@ -27,7 +32,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto saveOderService(OrderDto orderDto) {
-        // TODO Auto-generated method stub
         Order order = orderDto.convertToEntities();
         order.setCreatedAt(new Date());
         order.setUpdatedAt(new Date());
@@ -39,7 +43,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Object[] viewPageOrderService(int offset, int limit) {
-        // TODO Auto-generated method stub
         List<OrderDto> orderDtos = new ArrayList<OrderDto>();
         Object[] objects = orderRepo.findByProperty(null, "updated_at", Constant.DESC, offset, limit, null);
         Long total = (Long) objects[0];
@@ -52,13 +55,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto findByIdOrderService(Integer idOrder) {
-        // TODO Auto-generated method stub
         OrderDto orderDto = null;
         try {
             Order order = orderRepo.findById(idOrder);
             orderDto = order.convertToDto();
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println(e.getMessage());
         }
         return orderDto;
@@ -66,7 +67,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Object[] viewPageOrderServiceByStatus(int offset, int limit, Boolean status) {
-        // TODO Auto-generated method stub
         List<OrderDto> orderDtos = new ArrayList<OrderDto>();
         Map<String, Object> property = new HashMap<String, Object>();
         property.put("status", status);
@@ -81,7 +81,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Boolean updateOrderByStatus(Boolean status, int idOrder) {
-        // TODO Auto-generated method stub
         Order order = orderRepo.findById(idOrder);
         order.setStatus(status);
         if (order != null) {

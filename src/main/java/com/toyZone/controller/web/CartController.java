@@ -37,6 +37,11 @@ import com.toyZone.service.ProductOrderService;
 import com.toyZone.service.ProductService;
 import com.toyZone.service.UserService;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Controller
 public class CartController {
     @Autowired
@@ -65,7 +70,6 @@ public class CartController {
                 dto.setTotalPrices(productOrderDto.getPrice());
                 listSpDto.add(dto);
             }
-
         }
         map.addAttribute("message", message);
         map.addAttribute("orderdto", new OrderDto());
@@ -107,8 +111,6 @@ public class CartController {
             gioHang.getGioHangs().set(vtExits, productOrderDto);
             gioHang.setGioHangs(gioHang.getGioHangs());
             for (ProductOrderDto dto : gioHang.getGioHangs()) {
-                // total
-                // +=productService.findProductByIdService((Integer)dto.getIdProduct()).getPrice()*dto.getCount();
                 total += dto.getPrice();
                 totalItem += dto.getCount();
             }
@@ -123,8 +125,6 @@ public class CartController {
             gioHang.setGioHangs(gioHang.getGioHangs());
 
             for (ProductOrderDto dto : gioHang.getGioHangs()) {
-                // total
-                // +=productService.findProductByIdService((Integer)dto.getIdProduct()).getPrice()*dto.getCount();
                 total += dto.getPrice();
                 totalItem += dto.getCount();
             }
@@ -174,7 +174,6 @@ public class CartController {
                     dto.setTotalPrices(productOrderDto.getPrice());
                     listSpDto.add(dto);
                 }
-
             }
             map.addAttribute("message", "");
             map.addAttribute("order", new OrderDto());
@@ -184,14 +183,9 @@ public class CartController {
         if (gioHang.getGioHangs().size() <= 0) {
             return "redirect:/home";
         }
-
         try {
-
-            NumberFormat nf = NumberFormat.getInstance(new Locale("en", "US"));
             StringBuilder sendText = new StringBuilder();
             String from = "toychildshop@gmail.com";
-            //	List<ProductDto> listProduct = new ArrayList<ProductDto>();
-
             //format mail
             sendText.append("<style type=\"text/css\">\n" + "table {\n" + "	border-collapse: collapse;\n"
                     + "	width: 100%;\n" + "	}\n" + "	th,td{\n" + "		line-height: 25px;\n"
@@ -200,24 +194,13 @@ public class CartController {
             sendText.append(
                     "<p>Cảm ơn bạn đã mua hàng tại ShopToyHVN ! Mặt hàng của bạn sẽ được giao trong 2-3 ngày ! Cảm ơn bạn : </p>");
             sendText.append("<h1 style=" + "color:blue;" + ">ToyHVN</h1>");
-            //
 
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail);
 
             SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
             UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
-            //UserDto userDto = new UserDto();
 
-//			orderdto.setTotalMoney(Long.parseLong(gioHang.getTotalPrice().replace(",", "")));
-//			orderdto.setStatus(false);
-//			userDto.setId(sessionUser.getUserId());
-//			orderdto.setUserDto(userDto);
-
-//			orderdto = orderService.saveOderService(orderdto);
-
-            //format mail
-            //sendText.append("<p> Số lượng: " + orderdto.getId() + "</p>");
             sendText.append("<p> Ngày mua: " + orderdto.getCreatedDate() + "</p>");
             sendText.append("<p> Người gửi : " + userDtoMail.getFullName() + "</p>");
             sendText.append("<p> Người mua: " + orderdto.getReceiver() + "</p>");
@@ -226,62 +209,20 @@ public class CartController {
             sendText.append("<p> Nội dung : " + orderdto.getContent() + "</p>");
             sendText.append("<table><tr>");
             sendText.append("<th>Mã</th>").append("<th>Tên Sản Phẩm</th>").append("<th>Giá</th>")
-                    .append("<th>Giảm giá</th>").append("<th>Số Lượng</th>").append("<th>Tổn Tiền</th>");
+                    .append("<th>Giảm giá</th>").append("<th>Số Lượng</th>").append("<th>Tổng Tiền</th>");
             sendText.append("</tr>");
-            //
-
-            //kiem tra so luong hang co phu hop voi kho hay ko
-            //		for (ProductOrderDto po : gioHang.getGioHangs()) {
-            //			ProductDto productDto = productService.findProductByIdService(po.getIdProduct());
-            //			if(productDto.getCount()>=po.getCount()) {
-            //				productDto.setCount(productDto.getCount() -po.getCount());
-            //				listProduct.add(productDto);
-
-//					//format mail
-//					sendText.append("<tr>");
-//					sendText.append("<td>").append(productDto.getId().intValue()).append("</td>");
-//					sendText.append("<td>").append(productDto.getName()).append("</td>");
-//					sendText.append("<td>").append(nf.format(productDto.getPrice().longValue())).append("</td>");
-//					sendText.append("<td>").append(productDto.getDiscount()).append("</td>");
-//					sendText.append("<td>").append(po.getCount()).append("</td>");
-//					sendText.append("<td>").append(nf.format(po.getPrice().longValue())).append("</td>");
-//					sendText.append("</tr>");
-//					//
-//				}else {
-//					orderService.deleteOrderService(orderdto.getId());
-//					map.addAttribute("message","Sản Phẩm "+productDto.getName()+" Hết Hàng");
-//					return "redirect:/cart";
-//				}
-//			
-//			}
-//			//format mail
-//			sendText.append("</table>");
-//			sendText.append("<p style='color:red;'> Tổng giá tiền : ").append(gioHang.getTotalPrice()).append(" VND")
-//					.append("</p>");
-//			//
-//			int i = 0;
-//			for(ProductDto pDto : listProduct ) {
-//				gioHang.getGioHangs().get(i).setIdOrder(orderdto.getId());
-//				productOrderService.saveProductOderService(gioHang.getGioHangs().get(i));
-//				productService.saveProductService(pDto);
-//				i++;
-//			}
 
             helper.setFrom(from, from);
             helper.setTo(userDtoMail.getEmail());
             helper.setReplyTo(from, from);
-            helper.setSubject("Thank You !");
+            helper.setSubject("Hóa đơn điện tử");
             helper.setText(sendText.toString(), true);
-
             mailSender.send(mail);
-
         } catch (Exception e) {
-            // TODO: handle exception
             System.out.println(e.getMessage());
         }
         session = request.getSession(false);
         session.removeAttribute("gioHang");
         return "redirect:/home";
-
     }
 }

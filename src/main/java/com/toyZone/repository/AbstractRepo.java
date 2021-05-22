@@ -6,6 +6,11 @@ import java.util.Map;
 
 import org.hibernate.SessionFactory;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public interface AbstractRepo<ID extends Serializable, T> {
     List<T> findAll();
 

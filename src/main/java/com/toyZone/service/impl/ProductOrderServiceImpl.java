@@ -13,6 +13,11 @@ import com.toyZone.model.ProductOrder;
 import com.toyZone.repository.ProductOrderRepo;
 import com.toyZone.service.ProductOrderService;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Service
 public class ProductOrderServiceImpl implements ProductOrderService {
     @Autowired
@@ -29,7 +34,6 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 
     @Override
     public List<ProductOrderDto> getListProductOrderDtoByOrder(Integer idOrder) {
-        // TODO Auto-generated method stub
         List<ProductOrderDto> productOrderDtos = new ArrayList<ProductOrderDto>();
 
         Map<String, Object> property = new HashMap<String, Object>();

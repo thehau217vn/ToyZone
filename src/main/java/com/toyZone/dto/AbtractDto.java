@@ -5,7 +5,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class AbtractDto<T> {
+
     protected Integer id;
     protected long[] ids;
     protected List<T> listResult = new ArrayList<>();

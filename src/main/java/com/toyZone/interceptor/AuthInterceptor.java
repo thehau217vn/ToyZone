@@ -14,6 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.toyZone.dto.SessionUser;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class AuthInterceptor implements HandlerInterceptor {
     @Value("${user.login}")
     String loginUrl;
@@ -21,16 +26,11 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        // TODO Auto-generated method stub
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
-
         Auth roleAnnotation = AnnotationUtils.findAnnotation(method, Auth.class);
-
         Auth.Role role = roleAnnotation != null ? roleAnnotation.role() : null;
-
         HttpSession session = request.getSession();
-
 
         if (session.getAttribute("sessionUser") != null) {
             SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
@@ -48,28 +48,22 @@ public class AuthInterceptor implements HandlerInterceptor {
                         return false;
                     }
                 }
-
             }
         } else {
             response.sendRedirect(request.getContextPath() + loginUrl);
             return false;
         }
-
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        // TODO Auto-generated method stub
-
     }
 
 }

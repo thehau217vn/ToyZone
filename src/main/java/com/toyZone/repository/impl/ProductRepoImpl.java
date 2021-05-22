@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 import com.toyZone.model.Product;
 import com.toyZone.repository.ProductRepo;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Repository
 public class ProductRepoImpl extends AbstractRepoImpl<Integer, Product> implements ProductRepo {
 

@@ -6,6 +6,11 @@ import javax.validation.constraints.Size;
 
 import com.toyZone.model.Category;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class CategoryDto extends AbtractDto<CategoryDto> {
     @NotBlank(message = "Tên danh mục không được để trống")
     @Size(min = 1, message = "Tên danh mục không được để trống")

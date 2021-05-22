@@ -5,13 +5,18 @@ import javax.validation.constraints.NotBlank;
 import com.toyZone.model.Order;
 import com.toyZone.model.User;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 public class OrderDto extends AbtractDto<OrderDto> {
     private String content;
-    @NotBlank(message = "địa chỉ không được trống")
+    @NotBlank(message = "Địa chỉ không được trống")
     private String deliveryAddress;
-    @NotBlank(message = "số diện thoại người nhận không được trống")
+    @NotBlank(message = "Số điện thoại người nhận không được trống")
     private String phone;
-    @NotBlank(message = "tên người nhận không được trống")
+    @NotBlank(message = "Tên người nhận không được trống")
     private String receiver;
     private Boolean status;
     private Long totalMoney;

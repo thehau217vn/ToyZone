@@ -16,6 +16,11 @@ import com.toyZone.repository.UserRepo;
 import com.toyZone.service.UserService;
 import com.toyZone.utils.Constant;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -23,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto saveUserService(UserDto userDto) {
-        // TODO Auto-generated method stub
         User user = userDto.convertToEntities();
 
         Map<String, Object> properties = new HashMap<String, Object>();
@@ -61,18 +65,13 @@ public class UserServiceImpl implements UserService {
                 user = userRepo.update(user);
                 userDto = user.convertToDto();
             }
-
-
         }
-        // TODO Auto-generated method stub
         return userDto;
     }
 
     @Override
     public String deleteUserService(Integer id) {
-        // TODO Auto-generated method stub
         UserDto dto = findByIdUserService(id);
-
         if (userRepo.delete(id)) {
             return "success";
         } else {
@@ -91,16 +90,13 @@ public class UserServiceImpl implements UserService {
             userRepo.update(user);
             return true;
         }
-
         return false;
     }
 
 
     @Override
     public Object[] viewPageUserService(int offset, int limit) {
-        // TODO Auto-generated method stub
         List<UserDto> userDtos = new ArrayList<UserDto>();
-
         Object[] objects = userRepo.findByProperty(null, "updated_at", Constant.DESC, offset, limit, null);
 
         Long total = (Long) objects[0];
@@ -114,7 +110,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findByIdUserService(Integer id) {
-        // TODO Auto-generated method stub
         User user = userRepo.findById(id);
         UserDto userDto = user.convertToDto();
         return userDto;
@@ -122,7 +117,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Object[] findFilterUserService(String[] filter) {
-        // TODO Auto-generated method stub
         List<UserDto> userDtos = new ArrayList<UserDto>();
         Object[] objects = userRepo.findByProperty(null, "updated_at", Constant.DESC, null, null, filter);
         Long total = (Long) objects[0];
@@ -135,7 +129,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserByUserNameAndPassWordService(String account, String password) {
-        // TODO Auto-generated method stub
         Map<String, Object> properties = new HashMap<String, Object>();
         properties.put("account", account);
         properties.put("password", password);

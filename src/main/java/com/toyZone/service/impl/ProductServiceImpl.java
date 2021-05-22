@@ -19,6 +19,11 @@ import com.toyZone.service.ProductOrderService;
 import com.toyZone.service.ProductService;
 import com.toyZone.utils.Constant;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
@@ -30,7 +35,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto saveProductService(ProductDto productDto) {
-        // TODO Auto-generated method stub
         Product product = productDto.convertToEntity();
         if (product.getId() == null) {
             product.setCreatedAt(new Date());
@@ -44,14 +48,11 @@ public class ProductServiceImpl implements ProductService {
             product = productRepo.update(product);
             productDto = product.convertToDto();
         }
-
-        // TODO Auto-generated method stub
         return productDto;
     }
 
     @Override
     public String deleteProductService(Integer id) {
-        // TODO Auto-generated method stub
         ProductDto dto = findProductByIdService(id);
         File file = new File(context.getRealPath(dto.getImage()));
         file.delete();
@@ -64,9 +65,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Object[] viewPageProductService(int offset, int limit, int id_cate) {
-        // TODO Auto-generated method stub
         List<ProductDto> productDtos = new ArrayList<ProductDto>();
-
         Object[] objects = null;
 
         if (id_cate != 0) {
@@ -76,7 +75,6 @@ public class ProductServiceImpl implements ProductService {
         } else {
             objects = productRepo.findByProperty(null, "created_at", Constant.DESC, offset, limit, null);
         }
-
         Long total = (Long) objects[0];
         List<Product> listEntity;
         listEntity = (List<Product>) objects[1];
@@ -90,7 +88,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto findProductByIdService(Integer id) {
-        // TODO Auto-generated method stub
         Product product = productRepo.findById(id);
         ProductDto productdto = product.convertToDto();
         return productdto;
@@ -98,8 +95,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Object[] findFilterProductService(String[] filter) {
-        // TODO Auto-generated method stub
-        // TODO Auto-generated method stub
         List<ProductDto> productDtos = new ArrayList<ProductDto>();
         Object[] objects = productRepo.findByProperty(null, "updated_at", Constant.DESC, null, null, filter);
         Long total = (Long) objects[0];
@@ -112,7 +107,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getListSpKhuyenMaiService(int offset, int limit) {
-        // TODO Auto-generated method stub
         List<ProductDto> productDtos = new ArrayList<ProductDto>();
         List<Product> products = productRepo.getListSpKhuyenMai(offset, limit);
         for (Product product : products) {
@@ -123,17 +117,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int getCountSpKmService() {
-        // TODO Auto-generated method stub
         return productRepo.getCountSpKhuyenMai();
     }
 
     @Override
     public Object[] viewPageProductHotService(int offset, int limit) {
-        // TODO Auto-generated method stub
         List<ProductDto> productDtos = new ArrayList<ProductDto>();
-
         Object[] objects = productRepo.findByProperty(null, "updated_at", Constant.DESC, offset, limit, null);
-
         Long total = (Long) objects[0];
         List<Product> listEntity = (List<Product>) objects[1];
 
