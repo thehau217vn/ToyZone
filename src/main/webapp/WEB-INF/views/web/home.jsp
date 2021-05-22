@@ -6,6 +6,7 @@
              var="detail"/>
 <spring:eval expression="@property.getProperty('category.products')"
              var="url"/>
+<spring:eval expression="@property.getProperty('user.verify')" var="userVer"/>
 <c:url var="productofcate" value="${url}"/>
 <html>
 <head>

@@ -65,7 +65,11 @@ public class AccountController {
             return "/web/account/login";
         }
         loginUser = userService.getUserByUserNameAndPassWordService(user.getAccount(), user.getPassword());
-        if (loginUser != null && !(loginUser.getRoleId() == 3)) {
+        if (loginUser != null) {
+            if (!loginUser.isVerify()) {
+                userAccount = loginUser.getAccount();
+                return "redirect:/verify";
+            }
             SessionUser sessionUser = new SessionUser();
             sessionUser.setUserId(loginUser.getId());
             sessionUser.setFullName(loginUser.getFullName());
@@ -74,7 +78,7 @@ public class AccountController {
             session.setAttribute("sessionUser", sessionUser);
             if (loginUser.getRoleId() == Constant.ADMIN) {
                 return "redirect:/admin/trang-chu";
-            } else {
+            }  else {
                 return "redirect:/home";
             }
         } else {
@@ -112,17 +116,22 @@ public class AccountController {
     public String verify(ModelMap map, HttpSession session, @Validated @ModelAttribute("userVerify") UserDto userVer, BindingResult result) {
         String[] filter = {"account", userAccount};
         List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
-
-        System.out.println("Code: " + userVer.getOtpCode() + " userAccount: " + users.get(0).getAccount());
+        if (userVer.getOtpCode().equals(null) || userVer.getOtpCode().equals("")) {
+            map.addAttribute("message", "Mã OTP không được để trống");
+            map.addAttribute("alert", "danger");
+            return "web/account/verify";
+        }
         String userCode = userService.findByIdUserService(users.get(0).getId()).getOtpCode();
         if (userVer.getOtpCode().equals(userCode)) {
             userService.updateUserVerifyStatus(users.get(0).getId());
-            System.out.println("UserOTP: " + userVer.getOtpCode() + " userCode: " + userCode);
             map.addAttribute("message", "Kích hoạt tài khoản thành công");
+            map.addAttribute("alert", "success");
+            return "redirect:/home";
         } else {
             map.addAttribute("message", "Kích hoạt tài khoản thất bại");
+            map.addAttribute("alert", "danger");
+            return "web/account/verify";
         }
-        return "redirect:/home";
     }
 
     @RequestMapping(path = "/register", method = RequestMethod.POST)
@@ -272,7 +281,7 @@ public class AccountController {
                     "                                    Xin chào <b>" + userDto.getFullName() + "</b>,\n" +
                     "                                 </td>\n" +
                     "                                 <td style=\"display:block;margin-top:10px;text-align: left\">\n" +
-                    "                                    Cảm ơn bạn đã đăng ký tài khoản tại <b>ToyZoneShop</b> mã OTP của bạn là: <b>" + userDto.getOtpCode() + "</b> mã này có hiệu lực trong ngày hôm nay\n" +
+                    "                                    Cảm ơn bạn đã đăng ký tài khoản tại <b>ToyZoneShop</b> mã OTP của bạn là: <b>" + userDto.getOtpCode() + "</b>\n" +
                     "                                 </td>\n" +
                     "                              </tr>\n" +
                     "                              <tr>\n" +

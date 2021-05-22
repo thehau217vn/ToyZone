@@ -59,6 +59,8 @@ public class CartController {
     @Autowired
     JavaMailSender mailSender;
 
+    public static String userAccount = null;
+
     @RequestMapping(path = "/cart", method = RequestMethod.GET)
     public String viewCartProduct(ModelMap map, HttpSession session, @RequestParam(required = false) String message) {
         List<ProductDto> listSpDto = new ArrayList<ProductDto>();
@@ -165,6 +167,12 @@ public class CartController {
     @RequestMapping(path = "/order", method = RequestMethod.POST)
     public String insertOrder(ModelMap map, HttpSession session, HttpServletRequest request, @Validated @ModelAttribute("orderdto") OrderDto orderdto, BindingResult bindingResult) {
         SessionGioHang gioHang = (SessionGioHang) session.getAttribute("gioHang");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
+        UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
+//        if (!userDtoMail.isVerify()) {
+//            userAccount = userDtoMail.getAccount();
+//            return "redirect:/verify";
+//        }
         if (bindingResult.hasErrors()) {
             List<ProductDto> listSpDto = new ArrayList<ProductDto>();
             if (gioHang != null) {
@@ -197,9 +205,6 @@ public class CartController {
 
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mail);
-
-            SessionUser sessionUser = (SessionUser) session.getAttribute("sessionUser");
-            UserDto userDtoMail = userService.findByIdUserService(sessionUser.getUserId());
 
             sendText.append("<p> Ngày mua: " + orderdto.getCreatedDate() + "</p>");
             sendText.append("<p> Người gửi : " + userDtoMail.getFullName() + "</p>");

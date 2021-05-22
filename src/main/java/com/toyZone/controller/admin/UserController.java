@@ -53,9 +53,7 @@ public class UserController {
         }
 
         map.addAttribute("user", userDto);
-
         return "admin/user/list";
-
     }
 
     @RequestMapping(path = "/edit", method = RequestMethod.GET)

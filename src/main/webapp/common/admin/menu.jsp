@@ -50,14 +50,14 @@
     </div>
     <ul class="nav nav-list">
         <li>
-            <a class="dropdown-toggle">
+            <a class="dropdown-toggle disabled">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
                 Quản lý
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
-            <ul class="submenu">
+<%--            <ul class="submenu">--%>
                 <li>
                     <a href="${url_category}?page=${pageProp}&maxPageItem=${maxPageItemProp}">
                         <i class="menu-icon fa fa-caret-right"></i>
@@ -94,7 +94,7 @@
                     <b class="arrow"></b>
                 </li>
 
-            </ul>
+<%--            </ul>--%>
         </li>
     </ul>
     <div class="sidebar-toggle sidebar-collapse">
