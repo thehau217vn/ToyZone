@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.toyZone.interceptor.Auth;
 import com.toyZone.interceptor.Auth.Role;
 
+/**
+ * @Author : Hau Nguyen
+ * @Created : 5/20/21, Thursday
+ **/
+
 @Controller
 public class Home {
     @Auth(role = Role.ADMIN)
