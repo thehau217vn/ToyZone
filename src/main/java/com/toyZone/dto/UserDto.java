@@ -32,8 +32,8 @@ public class UserDto extends AbtractDto<UserDto> {
     @Size(min = 8, message = "Mật khẩu phải nhiều hơn 8 kí tự")
     private String password;
 
-    @NotBlank(message = "Mã OTP không được để trống")
-    @Size(min = 6, max = 6, message = "Mã OTP bao gồm 6 số")
+//    @NotBlank(message = "Mã OTP không được để trống")
+//    @Size(min = 6, max = 6, message = "Mã OTP bao gồm 6 số")
     private String otpCode;
     private boolean verify;
     private int roleId;

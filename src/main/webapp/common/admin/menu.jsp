@@ -50,8 +50,8 @@
     </div>
     <ul class="nav nav-list">
         <li>
-            <a class="dropdown-toggle disabled">
-                <i class="menu-icon fa fa-list"></i>
+            <a class="dropdown-toggle disabled" style="color: #1a1a1a">
+                <i class="menu-icon fa fa-sliders"></i>
                 <span class="menu-text"></span>
                 Quản lý
                 <b class="arrow fa fa-angle-down"></b>
@@ -60,35 +60,35 @@
 <%--            <ul class="submenu">--%>
                 <li>
                     <a href="${url_category}?page=${pageProp}&maxPageItem=${maxPageItemProp}">
-                        <i class="menu-icon fa fa-caret-right"></i>
+                        <i class="menu-icon fa fa-list"></i>
                         Danh mục
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li>
                     <a href="${url_product}?page=${pageProp}&maxPageItem=${maxPageItemProp}">
-                        <i class="menu-icon fa fa-caret-right"></i>
+                        <i class="menu-icon fa fa-product-hunt"></i>
                         Sản Phẩm
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li>
                     <a href="${url_order_chuagiao}?page=${pageProp}&maxPageItem=${maxPageItemProp}">
-                        <i class="menu-icon fa fa-caret-right"></i>
+                        <i class="menu-icon fa fa-bookmark"></i>
                         Đơn hàng
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li>
                     <a href="${url_user}?page=${pageProp}&maxPageItem=${maxPageItemProp}">
-                        <i class="menu-icon fa fa-caret-right"></i>
+                        <i class="menu-icon fa fa-users"></i>
                         Người Dùng
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li>
                     <a href="${thongke_url}">
-                        <i class="menu-icon fa fa-caret-right"></i>
+                        <i class="menu-icon fa fa-file-code-o"></i>
                         Thống Kê
                     </a>
                     <b class="arrow"></b>
@@ -97,8 +97,8 @@
 <%--            </ul>--%>
         </li>
     </ul>
-    <div class="sidebar-toggle sidebar-collapse">
-        <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left"
-           data-icon2="ace-icon fa fa-angle-double-right"></i>
-    </div>
+<%--    <div class="sidebar-toggle sidebar-collapse">--%>
+<%--        <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left"--%>
+<%--           data-icon2="ace-icon fa fa-angle-double-right"></i>--%>
+<%--    </div>--%>
 </div>

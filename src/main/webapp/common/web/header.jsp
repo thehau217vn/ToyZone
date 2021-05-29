@@ -20,7 +20,7 @@
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="${homeURl}"><img src="${pageContext.request.contextPath}/images/logo/logo1.png" /></a></h1>
+<%--            <h1><a href="${homeURl}"><img src="${pageContext.request.contextPath}/images/cua/19739_1554101959_CG-16OK.jpg" /></a></h1>--%>
         </div>
         <!---->
         <div class="top-nav">
@@ -54,7 +54,7 @@
         </div>
 
         <!---->
-        <div class="cart box_1">
+        <div class="cart box_1" style="float: left;position: relative; left: 650px; ">
             <%if (request.getSession().getAttribute("gioHang") != null) {%>
             <a href="<c:url value="${cartUrl}"/>">
                 <div id="carttotal" class="total">
@@ -87,7 +87,7 @@
 
             <%if (session.getAttribute("sessionUser") != null) {%>
         </div>
-        <h3 class="b3">
+        <h3 class="b3" >
             <span class="label label-info">Welcome,<%=((SessionUser) request.getSession().getAttribute("sessionUser")).getFullName()%></span></a>
             <a href="<c:url value='/logout'/>"><span class="label label-danger">Thoát</span></a>
         </h3>
@@ -96,10 +96,10 @@
     </div>
     <%} else {%>
 </div>
-<h3 class="b3">
-    <a href="<c:url value="${loginUrl}"/>"><span class="label label-info">Đăng Nhập</span></a>
-    <a href="${user_regis}"><span class="label label-info">Đăng ký</span></a>
-</h3>
+<div class="btn-dangnhap" style="display: flex;flex-direction: column; float: right; font-size: 30px; margin-right: ">
+    <a href="<c:url value="${loginUrl}"/>"><span class="label label-info">SIGN IN</span></a>
+    <a href="${user_regis}"><span class="label label-info">SIGN UP</span></a>
+</div>
 <div class="clearfix"></div>
 <!---->
 </div>
