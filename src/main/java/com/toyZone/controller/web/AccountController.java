@@ -137,6 +137,7 @@ public class AccountController {
     @RequestMapping(path = "/register", method = RequestMethod.POST)
     public String register(ModelMap map, HttpSession session, HttpServletRequest request, @Validated @ModelAttribute("userDk") UserDto userDto, BindingResult bindingResult, @RequestParam(required = false) String message) {
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult);
             return "/web/account/register";
         }
         String[] filter = {"account", userDto.getAccount()};

@@ -10,8 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ToyZone" target="1.5" />
-      <module name="toyZone" target="1.8" />
+      <module name="toyZone" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

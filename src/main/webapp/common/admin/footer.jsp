@@ -5,7 +5,7 @@
     <div class="footer-inner">
         <div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">ThienTra.com</span>
+							<span class="blue bolder">TOYZONE.COM.VN</span>
 						</span>
 
             &nbsp; &nbsp;
@@ -19,7 +19,7 @@
 							</a>
 
 							<a href="#">
-								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+								<i class="ace-icon fa fa-youtube-square red bigger-150"></i>
 							</a>
 						</span>
         </div>

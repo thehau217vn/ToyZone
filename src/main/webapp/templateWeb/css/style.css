@@ -6,7 +6,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
 body{
 	background:#fff;
-	font-family: 'Lato', sans-serif;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 body a{
 	transition: 0.5s all;
@@ -88,9 +88,11 @@ h1.b1,h2.b2,h3.b3 {
 	margin-bottom:1em;
 }
 .box_1{
-  float: right;
+  float: left;
   width: 15%;
   margin-top:2em;
+	position: relative;
+	left: 650px;
 }
 .box_1 h3{
   color: rgba(113, 111, 111, 1);
@@ -269,6 +271,14 @@ display:inline-block;
 	background: transparent url("../images/sp.png") no-repeat -77px -7px;
 	right:0;
 }
+
+.btn-dangnhap{
+	display: flex;
+	flex-direction: column;
+	float: right;
+	font-size: 30px;
+
+}
 /*----*/
 .items{
 	padding:4em 0;
@@ -289,8 +299,8 @@ display:inline-block;
     margin-top: 1em;
 }
 .arrival-info h4 {
-    color: #caccce;
-    font-size: 0.95em;
+    color: brown;
+    font-size: 1.2rem;
     font-family: 'Dosis-Bold';
     text-transform: uppercase;
 }
@@ -2167,6 +2177,7 @@ span.item_price {
 }
 .box_1 {
     width: 19%;
+
 }
 .form-control {
     width: 78%;
