@@ -23,7 +23,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<RoleDto> getListRoleService() {
-        // TODO Auto-generated method stub
         List<RoleDto> dtos = new ArrayList<RoleDto>();
         List<Role> entities = roleRepo.findAll();
         for (Role role : entities) {
@@ -35,7 +34,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDto getRoleById(int id) {
-        // TODO Auto-generated method stub
         return roleRepo.findById(id).convertToDto();
     }
 }

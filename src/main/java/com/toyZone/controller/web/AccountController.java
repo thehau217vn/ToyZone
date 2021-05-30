@@ -78,7 +78,7 @@ public class AccountController {
             session.setAttribute("sessionUser", sessionUser);
             if (loginUser.getRoleId() == Constant.ADMIN) {
                 return "redirect:/admin/trang-chu";
-            }  else {
+            } else {
                 return "redirect:/home";
             }
         } else {
@@ -142,7 +142,7 @@ public class AccountController {
         String[] filter = {"account", userDto.getAccount()};
         List<UserDto> users = (List<UserDto>) userService.findFilterUserService(filter)[1];
         if (users != null && users.size() > 0) {
-            map.addAttribute("message", "Đăng ký thành công, vui lòng kiểm tra lại");
+            map.addAttribute("message", "Đăng ký không thành công, vui lòng kiểm tra lại");
             return "redirect:/register";
         }
         userDto.setRoleId(Constant.USER);
@@ -281,7 +281,7 @@ public class AccountController {
                     "                                    Xin chào <b>" + userDto.getFullName() + "</b>,\n" +
                     "                                 </td>\n" +
                     "                                 <td style=\"display:block;margin-top:10px;text-align: left\">\n" +
-                    "                                    Cảm ơn bạn đã đăng ký tài khoản tại <b>ToyZoneShop</b> mã OTP của bạn là: <b>" + userDto.getOtpCode() + "</b>\n" +
+                    "                                    Cảm ơn bạn đã đăng ký tài khoản tại <b>ToyZone</b> mã OTP của bạn là: <b>" + userDto.getOtpCode() + "</b>\n" +
                     "                                 </td>\n" +
                     "                              </tr>\n" +
                     "                              <tr>\n" +
@@ -346,7 +346,7 @@ public class AccountController {
             System.out.println(userDto.getEmail());
             helper.setTo(userDto.getEmail());
             helper.setReplyTo(from, from);
-            helper.setSubject("[ToyZoneShop] Xác nhận đăng ký tài khoản");
+            helper.setSubject("[ToyZone] - Xác Nhận Đăng Ký Tài Khoản");
             helper.setText(sendText.toString(), true);
             //send req
             mailSender.send(mail);

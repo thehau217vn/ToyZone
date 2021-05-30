@@ -130,7 +130,8 @@
                 </div>
             </li>
             <li>
-                <div class="banner3" >
+                <div class="banner3" style="background: url('https://u6wdnj9wggobj.vcdn.cloud/media/catalog/category/BANNER_1340X250.png') no-repeat 0px 0px;background-size:cover;
+	min-height:585px;">
                     <div class="banner-info">
                     </div>
                 </div>
