@@ -19,7 +19,5 @@ public @interface Auth {
         USER,
     }
 
-    ;
-
     public Role role() default Role.LOGIN;
 }

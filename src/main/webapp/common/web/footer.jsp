@@ -30,7 +30,8 @@
         <div class="footer-grids">
             <div class="col-md-3 about-us">
                 <h3>Về chúng tôi</h3>
-                <p>Chuyên cung cấp các sản phẩm nội thất với chất lượng cao , gía cả hợp lý, phù hợp với người tiêu
+                <p>Chuyên cung cấp các sản phẩm đồ chơi cho trẻ em với chất lượng cao, gía cả hợp lý, có nguồn gốc xuất
+                    xứ và an toàn, phù hợp với người tiêu
                     dùng</p>
             </div>
             <div class="col-md-3 ftr-grid">
@@ -44,8 +45,8 @@
             <div class="col-md-3 ftr-grid">
                 <h3>Tài khoản</h3>
                 <ul class="nav-bottom">
-                    <li><a href="login.html">Đăng nhập</a></li>
-                    <li><a href="#">Đăng ký</a></li>
+                    <li><a href="http://localhost:8080/toyZone/login">Đăng nhập</a></li>
+                    <li><a href="http://localhost:8080/toyZone/register">Đăng ký</a></li>
                 </ul>
             </div>
             <div class="col-md-3 ftr-grid">
